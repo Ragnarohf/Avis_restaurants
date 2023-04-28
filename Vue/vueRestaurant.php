@@ -1,22 +1,14 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Restaurants - <?= $r['nom'] ?></title>
-</head>
-<body>
-<nav>
-    <a href="index.php">Restaurants Préférés</a>
-    <a href="mailto:contact@restaurants-preferes.fr">Contact</a>
-</nav>
-<h1><?= $r['nom'] ?></h1>
-<address>
-    <?= $r['adresse'] . '<br>' . $r['cp'] . ' ' . $r['ville'] ?>
-</address>
+<?php
+$titre = 'Restaurants Préférés -' . $r['nom'];
+
+ob_start();
+?>
+    <h1><?= $r['nom'] ?></h1>
+    <address><?= $r['adresse'] . '<br>' . $r['cp'] . ' ' . $r['ville'] ?></address>
 <?= chunk_split(sprintf("%'.010d", $r['telephone']), 2, ' ') ?>
-<h2>Description</h2>
+    <h2>Description</h2>
 <?= $r['description'] ?>
-<h2>Avis</h2>
+    <h2>Avis</h2>
 <?php
 foreach ($avis as $a) :
     $auteur = $a['auteur'];
@@ -36,8 +28,11 @@ foreach ($avis as $a) :
             <img src="Media/pasetoile.png" alt="">
             <?php
             $i++;
-        endwhile; ?></span>
+        endwhile;
+        ?></span>
     <p><?= $a['commentaire'] ?></p>
-<?php endforeach; ?>
-</body>
-</html>
+<?php
+endforeach;
+$contenu = ob_get_clean();
+
+require 'gabarit.php';
