@@ -1,14 +1,14 @@
 <?php
-
-
 require_once './Modele/Restaurant.class.php';
 require_once './Modele/Avis.class.php';
+require_once './Vue/Vue.class.php';
 
 function accueil()
 {
     $rest = new Restaurant();
     $restaurants = $rest->getRestaurants();
-    require './Vue/vueAccueil.php';
+    $vue = new Vue('Accueil');
+    $vue->afficher(['restaurants' => $restaurants]);
 }
 
 function restaurant()
@@ -20,9 +20,9 @@ function restaurant()
     }
     $rest = new Restaurant();
     $r = $rest->getRestaurant($idRestaurant);
-
     $av = new Avis();
     $avis = $av->getAvis($idRestaurant);
 
-    require './Vue/vueRestaurant.php';
+    $vue = new Vue('Restaurant');
+    $vue->afficher(['r' => $r, 'avis' => $avis]);
 }

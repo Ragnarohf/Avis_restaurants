@@ -1,8 +1,7 @@
 <?php
-$titre = 'Restaurants Préférés -' . $r['nom'];
-
-ob_start();
+$this->titre = 'Restaurants Préférés -' . $r['nom'];
 ?>
+
     <h1><?= $r['nom'] ?></h1>
     <address><?= $r['adresse'] . '<br>' . $r['cp'] . ' ' . $r['ville'] ?></address>
 <?= chunk_split(sprintf("%'.010d", $r['telephone']), 2, ' ') ?>
@@ -33,6 +32,3 @@ foreach ($avis as $a) :
     <p><?= $a['commentaire'] ?></p>
 <?php
 endforeach;
-$contenu = ob_get_clean();
-
-require 'gabarit.php';

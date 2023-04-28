@@ -1,8 +1,7 @@
 <?php
-$titre = 'Restaurants Préférés';
-
-ob_start();
+$this->titre = 'Restaurants Préférés';
 ?>
+
     <h1>Vos restaurants préférés</h1>
 <?php
 foreach ($restaurants as $r) :
@@ -14,6 +13,3 @@ foreach ($restaurants as $r) :
     <hr>
 <?php
 endforeach;
-$contenu = ob_get_clean();
-
-require 'gabarit.php';

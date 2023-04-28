@@ -1,6 +1,7 @@
 <?php
 
-require 'Controller/Controleur.php';
+require_once './Controller/Controleur.php';
+require_once './Vue/Vue.class.php';
 
 try {
     $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
@@ -12,9 +13,13 @@ try {
         throw new Exception('Action inconnue');
     }
 } catch (PDOException $e) {
-    $msgErreur = 'L\'accès aux données a échoué (code : ' . $e->getCode() . ')';
-    require './Vue/vueErreur.php';
+    afficherErreur('L\'accès aux données a échoué (code : ' . $e->getCode() . ')');
 } catch (Exception $e) {
-    $msgErreur = $e->getMessage();
-    require './Vue/vueErreur.php';
+    afficherErreur($e->getMessage());
+}
+
+function afficherErreur($msgErreur)
+{
+    $vue = new Vue('Erreur');
+    $vue->afficher(['msgErreur' => $msgErreur]);
 }
