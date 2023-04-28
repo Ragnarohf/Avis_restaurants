@@ -7,7 +7,7 @@ ob_start();
 <?php
 foreach ($restaurants as $r) :
     ?>
-    <a href="restaurant.php?idRestaurant=<?= $r['idRestaurant'] ?>">
+    <a href="index.php?action=restaurant&idRestaurant=<?= $r['idRestaurant'] ?>">
         <h2><?= $r['nom'] ?></h2></a>
     <address><?= $r['ville'] ?></address>
     <?= $r['description'] ?>
