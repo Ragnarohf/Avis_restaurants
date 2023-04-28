@@ -1,10 +1,14 @@
 <?php
-require_once '/wamp64/www/ENI/Avis_restaurants/Modele/modeleRestaurant.php';
+
+
+require_once './Modele/Restaurant.class.php';
+require_once './Modele/Avis.class.php';
 
 function accueil()
 {
-    $restaurants = getRestaurants();
-    require '/wamp64/www/ENI/Avis_restaurants/Vue/vueAccueil.php';
+    $rest = new Restaurant();
+    $restaurants = $rest->getRestaurants();
+    require './Vue/vueAccueil.php';
 }
 
 function restaurant()
@@ -14,11 +18,11 @@ function restaurant()
     if (!$idRestaurant) {
         throw new Exception('L\'identifiant du restaurant doit être un nombre');
     }
-    $r = getRestaurant($idRestaurant);
-    if (!$r) {
-        throw new Exception('Ce restaurant n\'existe pas');
-    }
-    $avis = getAvis($idRestaurant);
+    $rest = new Restaurant();
+    $r = $rest->getRestaurant($idRestaurant);
 
-    require '/wamp64/www/ENI/Avis_restaurants/Vue/vueRestaurant.php';
+    $av = new Avis();
+    $avis = $av->getAvis($idRestaurant);
+
+    require './Vue/vueRestaurant.php';
 }
